@@ -12,11 +12,10 @@ export default function AddUser() {
       fname: '',
       lname: '',
       email: '',
-      phone: null,
+      phone: '',
       address: '',
       id: null
     };
-
   }
 
   function handleInput(event) {
@@ -26,16 +25,26 @@ export default function AddUser() {
   }
 
   function handleAddUser(e) {
-    e.preventDefault()
+    // e.preventDefault()
     data.id = Math.random();
     dispatch({ type: string.ADD_USER, payload: { newUser: data } })
-    setData(initialState)
+    
   }
 
+  function handleSubmit(e){
+      e.preventDefault();
+      if(!data.fname || !data.lname || !data.email || !data.phone || !data.address){
+        alert("All fields are mendatory!")
+      }
+      else{
+        setData(initialState())
+      }
+  }
+// console.log(!data.fname,!data.lname, !data.email, !data.phone, !data.address)
   const { fname, lname, email, phone, address } = data;
   return (
     <div className='container border mt-5'>
-      <form className='w-50 m-auto mt-3'>
+      <form className='w-50 m-auto mt-3' onSubmit={handleSubmit}>
         <div className='row mb-3 '>
           <div className='col-6'>
             <label htmlFor='fname' className='form-label'>First Name</label>
